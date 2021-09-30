@@ -10,7 +10,7 @@ def get_data(base_url = 'https://python.zgulde.net', classifier):
     for page in range(1,n + 1):
         juicy_data = requests.get(base_url + f'/api/v1/{classifier}?page={page}')
         data = juicy_data.json()
-        holder = pd.DataFrame(data['payload']['sales'])
+        holder = pd.DataFrame(data['payload'][classifier])
         df = pd.concat([df, holder],ignore_index = True)
         
     return df
