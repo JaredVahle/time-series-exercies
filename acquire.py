@@ -14,3 +14,13 @@ def get_data(base_url = 'https://python.zgulde.net', classifier):
         df = pd.concat([df, holder],ignore_index = True)
         
     return df
+
+def get_german_data():
+    df = pd.read_csv('https://raw.githubusercontent.com/jenfly/opsd/master/opsd_germany_daily.csv')
+    
+    return df
+
+def get_sales_data():
+    df = pd.read_csv('sales_data.csv')
+
+    return df
