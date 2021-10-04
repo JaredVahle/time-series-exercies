@@ -27,3 +27,12 @@ def add_cols_sales(df):
     df['sales_total'] = df.item_price * df.sale_amount
 
     return df
+
+def add_date_info(df):
+    '''
+    Takes in a dateframe with a datetime index and returns the year, month, and weekday
+    '''
+    df['year'] = pd.DatetimeIndex(df.index).year
+    df['month'] = pd.DatetimeIndex(df.index).month
+    df['day_of_week'] = pd.DatetimeIndex(df.index).weekday
+    return df
