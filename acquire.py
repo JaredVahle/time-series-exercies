@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import os
 
 
 def get_data(base_url = 'https://python.zgulde.net', classifier):
@@ -17,10 +18,13 @@ def get_data(base_url = 'https://python.zgulde.net', classifier):
 
 def get_german_data():
     df = pd.read_csv('https://raw.githubusercontent.com/jenfly/opsd/master/opsd_germany_daily.csv')
-    
+
     return df
 
 def get_sales_data():
-    df = pd.read_csv('sales_data.csv')
+    if os.path.isfile('sales_data.csv'):
+        df = pd.read_csv('sales_data.csv', index_col = 0)
+    else:
+        print('File not found')
 
     return df
