@@ -1,6 +1,31 @@
 import requests
 import pandas as pd
 import os
+import env
+
+def get_connection(db, user=env.user, host=env.host, password=env.password):
+    return f'mysql+pymysql://{user}:{password}@{host}/{db}'
+
+def get_item_data():
+    filename = "tsa_item.csv"
+    query = '''
+SELECT *
+FROM sales
+JOIN stores ON stores.store_id = sales.store_id
+JOIN items ON items.item_id = sales.item_id;
+'''
+
+    if os.path.isfile("tsa_item.csv"):
+        return pd.read_csv("tsa_item.csv")
+    else:
+        # read the SQL query into a dataframe
+        df = pd.read_sql(query, get_connection("tsa_item_demand"))
+
+        # Write that dataframe to disk for later. Called "caching" the data for later.
+        df.to_csv("tsa_item.csv")
+
+        # Return the dataframe to the calling code
+        return df 
 
 
 #def get_data(base_url = 'https://python.zgulde.net', classifier):

@@ -33,6 +33,14 @@ def add_date_info(df):
     Takes in a dateframe with a datetime index and returns the year, month, and weekday
     '''
     df['year'] = pd.DatetimeIndex(df.index).year
-    df['month'] = pd.DatetimeIndex(df.index).month
+    df['month'] = pd.DatetimeIndex(df.index).month_name
     df['day_of_week'] = pd.DatetimeIndex(df.index).weekday
+    return df
+
+def col_rename(df):
+    df.rename(columns = {'Date':'date',
+                         'Consumption':'consumption',
+                         'Wind':'wind',
+                         'Solar':'solar',
+                         'Wind+Solar':'wind_and_solar'}, inplace = True)
     return df
