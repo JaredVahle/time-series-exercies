@@ -27,6 +27,12 @@ JOIN items ON items.item_id = sales.item_id;
         # Return the dataframe to the calling code
         return df 
 
+query = '''
+SELECT *
+FROM sales
+JOIN stores ON stores.store_id = sales.store_id
+JOIN items ON items.item_id = sales.item_id;
+'''
 
 #def get_data(base_url = 'https://python.zgulde.net', classifier):
 #    response = requests.get(base_url + '/api/v1/' + classifier)
