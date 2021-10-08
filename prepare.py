@@ -44,3 +44,21 @@ def col_rename(df):
                          'Solar':'solar',
                          'Wind+Solar':'wind_and_solar'}, inplace = True)
     return df
+
+def clean_temp_data(df):
+    '''
+    Takes in a dataframe and selects only for the city of newyork, removes unneeded columns,
+    groups the values by every 3 months, and removes null values.
+    '''
+    df = df[df.City == 'New York']
+    df = df[df.AverageTemperatureUncertainty < 10]
+    
+    df.drop(columns = ["City", "Country", "Latitude", "Longitude","AverageTemperatureUncertainty"],inplace = True)
+    df.rename(columns = {'AverageTemperature': "avg_temp"},inplace = True)
+    df['avg_temp'] = (df.avg_temp * 9/5) + 32
+
+    df['dt'] = pd.to_datetime(df.dt)
+    df.set_index('dt',inplace = True)
+    df.dropna(inplace = True)
+    
+    return df

@@ -59,3 +59,7 @@ def get_sales_data():
         print('File not found')
 
     return df
+
+def get_temp_data():
+    df = pd.read_csv('GlobalLandTemperaturesByMajorCity.csv')
+    return df
